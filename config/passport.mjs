@@ -11,7 +11,6 @@ passport.use(
     },
     // callback function on authorisation success
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       done(null, profile);
     }
   )
