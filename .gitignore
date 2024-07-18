@@ -1,3 +1,5 @@
 node_modules
 secrets.js
+secrets.mjs
 secrets.json
+nodemon.json
