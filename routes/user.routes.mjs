@@ -20,4 +20,13 @@ router.get("/logged", (req, res) => {
   res.render("logged");
 });
 
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    // Redirect or handle the logout success
+    res.redirect("/");
+  });
+});
 export default router;
