@@ -3,27 +3,11 @@ import cors from "cors";
 import path from "path";
 import { engine } from "express-handlebars";
 
-import passport from "passport";
-import Strategy from "passport-google-oauth20";
+import passport from "./config/passport.mjs";
+// import Strategy from "passport-google-oauth20";
 import session from "express-session";
 
 const app = express();
-
-// set up passport
-passport.use(
-  new Strategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_ADDRESS,
-    },
-    // callback function on authorisation success
-    (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
-      done(null, profile);
-    }
-  )
-);
 
 const __dirname = path.resolve();
 
@@ -46,16 +30,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-// serialize user when saving to session
-passport.serializeUser((user, serialize) => {
-  serialize(null, user);
-});
-
-// deserialize user when reading from session
-passport.deserializeUser((obj, deserialize) => {
-  deserialize(null, obj);
-});
 
 // app.get("/favicon.ico", (req, res) => res.status(204).end());
 
